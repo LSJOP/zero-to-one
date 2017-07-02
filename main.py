@@ -27,6 +27,8 @@ def start():
     if N == 1:
         New_User()
     elif N == 2:
+        # 加载数据
+        read_passwd_data()
         landing()
     else:
         print("输入有误，请重新输入")
@@ -42,6 +44,7 @@ def New_User():
     user_password.append(temp)
     print("%s 注册成功" % New_Name)
     print(user_password)
+    passwd_data()
     return start()
 
 def admin():
@@ -76,6 +79,7 @@ def admin():
             elif select == 3:
                 return del_user()
             elif select == 4:
+                passwd_data()
                 return start()
             else:
                 print('输入错误')
@@ -140,6 +144,20 @@ def del_user():
                 start()
             else:
                 print('密码错误')
+
+
+def passwd_data():
+    # 密码文件
+    f = open('passwd_data.txt', 'w')
+    f.write(str(user_password))
+    f.close()
+
+
+def read_passwd_data():
+    global  user_password
+    r = open('passwd_data.txt', 'r')
+    user_password = eval(r.read())
+    r.close()
 
 
 if __name__ == '__main__':
